@@ -4,7 +4,7 @@
 
 Arctyx is a modular, animated, and beautifully themed [EWW](https://github.com/elkowar/eww) widget system designed for **Hyprland**. Crafted with performance, style, and minimal distraction in mind.
 
-![Screenshot](./4eeed2fe-b577-4d57-964d-5b09358c245f.png)
+![Screenshot]([./4eeed2fe-b577-4d57-964d-5b09358c245f.png](https://github.com/pritayan/Arctyx/blob/347810d974eda61b148aa9ccab125bf9c5b43112/Screenshots/image.png))
 
 ---
 
