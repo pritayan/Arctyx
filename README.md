@@ -1,6 +1,6 @@
 # 🌌 Arctyx — The Aesthetic EWW Bar for Hyprland
 
-> ⚔️ Replace Waybar. Reclaim your screen. Style your desktop the way **LORD ZOVRATH** intended.
+> ⚔️ Replace Waybar. Reclaim your screen.
 
 Arctyx is a modular, animated, and beautifully themed [EWW](https://github.com/elkowar/eww) widget system designed for **Hyprland**. Crafted with performance, style, and minimal distraction in mind.
 
