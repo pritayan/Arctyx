@@ -1,4 +1,5 @@
 # 🌌 Arctyx — The Aesthetic EWW Bar for Hyprland
+                                        - By Pritayan
 
 > ⚔️ Replace Waybar. Reclaim your screen.
 
@@ -42,7 +43,8 @@ Arctyx is a modular, animated, and beautifully themed [EWW](https://github.com/e
 
 ---
 ## AND THAT'S 'SCRIPTS' NOT 'SCRITPS' ...... 
-
+---
+## [NOTE] - There could be error and bugs right now as I am still working on this. 
 ## Changes and Edits are welcome. Join me in making it more advance and Frost-cool !!!! 
 ---
 ## 📦 Installation
