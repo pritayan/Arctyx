@@ -46,12 +46,12 @@ Arctyx is a modular, animated, and beautifully themed [EWW](https://github.com/e
 ---
 
 **CONFIGURATION OVERVIEW**
-.
-├── eww.yuck       # EWW layout (widgets + windows)
-├── eww.scss       # All widget styling in SCSS
-├── config.yaml    # Global configuration
-├── scripts/       # Custom shell scripts
-└── assets/        # Optional: for music art / background (not included yet)
+-.
+-├── eww.yuck       # EWW layout (widgets + windows)
+-├── eww.scss       # All widget styling in SCSS
+-├── config.yaml    # Global configuration
+-├── scripts/       # Custom shell scripts
+-└── assets/        # Optional: for music art / background (not included yet)
 
 
 ## AND THAT'S 'SCRIPTS' NOT 'SCRITPS' ...... 
@@ -65,9 +65,14 @@ git clone https://github.com/pritayan/Arctyx ~/.config/eww
 # Make sure eww is installed and running
 eww daemon &
 
+# Change directory to eww
+cd ~/.config/eww
+
 # Open your window by running the script 
 ./ewwloader.sh
 
+# Make the script executable (if not)
+sudo chmod +x ewwloader.sh
 
 
 
