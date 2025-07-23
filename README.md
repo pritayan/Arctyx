@@ -46,6 +46,13 @@ Arctyx is a modular, animated, and beautifully themed [EWW](https://github.com/e
 ## [NOTE] - There could be error and bugs right now as I am still working on this. 
 ## Changes and Edits are welcome. Join me in making it more advance and Frost-cool !!!! 
 ---
+
+## Tips
+- Try to assign a keyboard shortcut key to start the eww. If you are using hyprlan (and/or dotfiles) you can create a keybind file to assign specific key to execute specific task.
+- Make sure you assign keyboard key for both running and quiting the eww. I could make an widget to run the whole setup. But to terminate, the widget would also got lost.
+
+---
+
 ## 📦 Installation
 
 ```bash
@@ -63,7 +70,5 @@ cd ~/.config/eww
 
 # Make the script executable (if not)
 sudo chmod +x ewwloader.sh
-
-
 
 
