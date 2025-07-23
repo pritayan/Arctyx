@@ -1,0 +1,365 @@
+* {
+  all:unset
+}
+
+/*@keyframes fade-in-out {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}*/
+
+.clock-itself {
+  padding: 5px 5px;
+}
+
+.time-font {
+  font-size: 100px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+
+}
+
+.timePM-font {
+  font-size: 60px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1f88e4;
+  padding: 0px 0px;
+  margin-left: 0px;
+}
+
+.day-font {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+  padding: 0px 0px;
+  margin-top: 0px;
+  margin-right: 205px;
+}
+
+.userbox {
+  background-color: rgba($color: #d2d2d2, $alpha: 0.1);
+  border-radius: 40px;
+  padding: 10px 20px 10px 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  padding-top: 10px;
+  padding-left: 0px;
+  /*align-items: center;*/
+  /*spacing: 12px;*/
+}
+
+.user-avatar {
+  border-radius: 50%;       /* Makes the image perfectly circular */
+  border: 0px solid #aaa;   /* Optional: border for emphasis */
+  /*object-fit: cover;    */    /* Ensures the image fills the circular area */
+}
+
+.user-name {
+  font-weight: bold;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1.5em;
+}
+.host-name {
+  opacity: 0.8;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 1em;
+}
+
+.bg {
+	background-image: url("/home/pritayan/.config/ml4w/cache//blurred_wallpaper.png");
+	background-color: #ffffff;
+  background-size: cover;
+  animation-delay: 0s;
+	opacity: 1;
+}
+
+
+.quote {
+  font-weight:normal;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-style: italic;
+  font-size: 2em;
+}
+
+/*  =============== POWER MENU ==========================  */
+.powermenu {
+  background-color: rgba($color: #e73d3d, $alpha: 1);
+  border-radius: 120px;
+}
+
+.logoutmenu {
+  background-color: rgba($color: #3d43e7, $alpha: 1);
+  border-radius: 120px;
+}
+
+.rebootmenu {
+  background-color: rgba($color: #1dab29, $alpha: 1);
+  border-radius: 120px;
+}
+
+.sleepmenu {
+  background-color: rgba($color: #801997, $alpha: 1);
+  border-radius: 120px;
+}
+
+
+.shut-text {
+  font-size: 40px;
+}
+
+.logout-text {
+  font-size: 25px;
+}
+
+.reboot-text {
+  font-size: 30px;
+  font-weight: bold;
+  padding-right: 0px;
+}
+
+.sleep-text {
+  font-size: 25px;
+}
+/* ============== POWER MENU END ====================== */ 
+
+/* ============== WIFI MENU ====================== */ 
+
+.wifibox {
+  background-color: rgba($color: #ffffff, $alpha: 0.1);
+  border-radius: 40px;
+
+}
+
+.wifilogo {
+  font-size: 30px;
+  padding-left: 0px;
+  padding-right: 9px;
+}
+
+.bluetoothlogo {
+  font-size: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.wifitext {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 0px;
+}
+
+/* ============== WIFI MENU END ====================== */ 
+
+
+
+.volbox {
+  background: rgba(60, 60, 60, 0);
+  border-radius: 40px;
+  padding: 0px 8px 0px 8px;
+}
+
+.volicon {
+  font-size: 25px;
+  margin-right: 9px;
+  color: #ffffff;
+}
+
+
+.volbar trough {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 40px;
+}
+
+.volbar progress {
+  background-color: #ffffff;
+  border-radius: 40px;
+}
+.volnum {
+  font-size: 20px;
+  color: #e0eaff;
+  margin-left: 0px;
+  font-weight: bold;
+}
+/*==============================================================*/
+
+
+/*====================== MUSIC ==================================*/
+
+
+.musicinfo-title {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.musicinfo-album {
+  font-size: 20px;
+  font-weight: normal;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  opacity: 0.6;
+}
+
+.music-btn {
+  background-color: rgba($color: #ffffff, $alpha: 0);
+  border-radius: 40px;
+  font-size: 50px;
+}
+
+.volup {
+  background-color: rgba($color: #ffffff, $alpha: 0);
+  border-radius: 40px;
+  font-size: 50px;
+}
+
+.voldown {
+  background-color: rgba($color: #ffffff, $alpha: 0);
+  border-radius: 40px;
+  font-size: 50px;
+}
+
+.music_duration {
+  font-size: 18px;
+}
+
+
+.greeting-box {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 16px;
+
+}
+.greeting-text {
+  font-size: 2em;
+  font-weight: 700;
+  color: #ffffff;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 0.6;
+}
+
+.pritayan {
+  font-size: 2em;
+  font-weight: 700;
+  color: #ffffff;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 0.6;
+}
+
+/*============== UPDATE ====================*/
+.updatebox {
+  background-color: rgba(8, 98, 231, 0.1);
+  border-radius: 40px;
+}
+
+.updateicon {
+  font-size: 2.6em;
+  color: #ffffff;
+  padding-left: 18px;
+}
+
+.updatenum {
+  font-size: 25px;
+  color: #ffffff;
+
+}
+
+.pending {
+  font-size: 25px;
+  color: #ffffff;
+  padding-right: 4px;
+}
+
+
+/*============= APP LIST ==========================*/
+.applist-box {
+
+  background: rgba(255, 255, 255, 0.1);
+  padding: 9px 20px;
+  border-radius: 0px;
+
+
+}
+
+.app-btn {
+  background: transparent;
+  border-radius: 10px;
+  padding: 4px;
+
+}
+
+.app-icon {
+
+  border-radius: 7px;
+  font-size: 50px;
+
+}
+
+/*================================================*/
+
+.iconcpu, .iconmem, .iconbright, .iconbat {
+    font-size: 32px;
+    font-weight: normal;
+}
+.iconcpu  { color: rgba($color: #cb4848, $alpha: 0.8); font-size: 40px;}
+.iconmem  { color: #A3BE8C; font-size: 40px;}
+.iconbright { color: #EBCB8B; font-size: 40px;}
+.iconbat  { color: #88C0D0; font-size: 40px;}
+
+.cpu_bar, .mem_bar, .bright_bar, .bat_bar, scale trough {
+    background-color: rgba($color: #ffffff, $alpha: 0);
+    border-radius: 40px;
+    min-height: 30px;
+    min-width: 275px;
+}
+
+.cpu_bar scale trough highlight    { background-color: rgba($color: #cb4848, $alpha: 0.7); border-radius: 40px;}
+.mem_bar scale trough highlight    { background-color:rgba($color: #a3be8c, $alpha: 0.7); border-radius: 40px;}
+.bright_bar scale trough highlight { background-color: rgba($color: #ebcb8b, $alpha: 0.7); border-radius: 40px;}
+
+
+.today {
+  background-color: rgba($color: #303030, $alpha: 0.4);
+  font-size: 50px;
+  border-radius: 40px;
+  color:#ffffff;
+  font-weight: bold;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.bountybox {
+  background-color: rgba($color: #ffffff, $alpha: 0);
+  border-radius:40px;
+}
+
+.bountytext {
+  background-color: rgba($color: #ffffff, $alpha: 0);
+  font-size: 30px;
+  font-weight: bold;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 0.5;
+}
+
+/*=============== journal ================*/ 
+
+.journal-icon {
+  font-size: 200px;
+  padding-bottom: 90px;
+}
+
+.journalbtn{ background-color: rgba($color: #ffffff, $alpha: 0.1); border-radius: 0px;}
+.pomobox{ background-color: rgba($color: #ffffff, $alpha: 0.1); border-radius: 0px;}
+.pomotext { font-size: 70px; font-weight: bold;}
+.uptimetext { font-size: 45px; font-weight: bold;}
+.uptimehour { font-size: 50px;}
+.uptimeminute { font-size: 28px;}
+
+.tempbox { background-color: rgba($color: #ffffff, $alpha: 0.1);}
+.zovtext { font-size: 100px; font-weight: bold; color: rgba($color: #ffffff, $alpha: 0.5); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
+.jotext { font-size: 40px; font-weight: bold; color: rgba($color: #ffffff, $alpha: 1); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
+.hellotext { font-size: 180px; font-weight: bold; color: rgba($color: #ffffff, $alpha: 1); font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;}
+.timerbtn { font-size: 50px;}

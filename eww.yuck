@@ -1,0 +1,907 @@
+;;======================================================================
+;;=                                                                    =
+;;=                            V A R I A B L E S                       =
+;;=                                                                    =
+;;====================================================================== 
+
+
+(defpoll TIME :interval "5s" "date '+%I:%M'")
+(defpoll TIME_PM :interval "5s" "date '+%p' | tr '[:lower:]' '[:upper:]'")
+(defpoll DATE :interval "5s" "date '+%A , %d %B %Y'")
+(defpoll USER :interval "30m" "whoami")
+(defpoll HOST :interval "30m" "hostname")
+(defpoll QUOTE :interval "10s" "~/.config/eww/scripts/quote.sh")
+(defpoll WIFI :interval "5s" "~/.config/eww/scripts/wifistatus.sh")
+(defpoll BLUETOOTH :interval "5s" "~/.config/eww/scripts/bluetooth.sh")
+(defpoll VOLUME :interval "0.01s" "pamixer --get-volume")
+(defpoll COVER_IMAGE :interval "0.1s" "echo /home/pritayan/.config/eww/cache/music_cover.jpg")
+(defpoll MUSIC_COVER   :interval "2s" "echo /home/youruser/.config/eww/cache/music_cover.jpg")
+(defpoll MUSIC_TITLE   :interval "2s" "playerctl metadata title")
+(defpoll MUSIC_ELAPSED :interval "1s" "playerctl position | awk '{printf \"%d:%02d\", int($1/60), int($1%60)}'")
+(defpoll MUSIC_ALBUM :interval "2s" "playerctl metadata album || echo 'Unknown Album'")
+(defpoll MUSIC_STATUS :interval "1s" "playerctl status")
+(defpoll MUSIC_PROGRESS :interval "1s" "~/scripts/music_progress.sh")
+(defpoll DAYTIME :interval "1s" "/home/pritayan/Documents/scripts/daytime.sh")
+(defpoll UPDATE_COUNT :interval "60m" "/home/pritayan/Documents/scripts/updatecount.sh")
+(defpoll BOUNTY :interval "1s" "head ~/Documents/bounty.txt")
+(defpoll CPU_USAGE :interval "2s" "top -bn1 | grep '%Cpu' | awk '{print 100 - $8}' | cut -d'.' -f1")
+(defpoll MEM_USAGE :interval "2s" "free | awk '/Mem:/ {print int($3 / $2 * 100)}'")
+(defpoll BLIGHT :interval "2s" "brightnessctl g | awk '{printf(\"%d\", $1/10.23)}'") ; for 0-100 (adjust if needed)
+(defpoll BATTERY :interval "10s" "cat /sys/class/power_supply/BAT0/capacity")
+(defpoll pomodoro-time :interval "1s" "cat /tmp/eww-timer-time") 
+(defpoll uptime-hours :interval "1m" "uptime -p | grep -oE '[0-9]+ hours' || echo '0 hour'")
+(defpoll uptime-minutes :interval "1m" "uptime -p | grep -oE '[0-9]+ minutes' || echo '0 minute'")
+
+
+(defpoll MUSIC_TOTAL :interval "2s" "
+len=$(playerctl metadata mpris:length 2>/dev/null);
+if [[ -z \"$len\" || $len -eq 0 ]]; then
+  echo '0:00';
+else
+  sec=$((len / 1000000));
+  printf '%d:%02d\\n' $((sec / 60)) $((sec % 60));
+fi
+")
+
+(defpoll MUSIC_PLAY_ICON :interval "1s" "
+if [ \"$(playerctl status)\" = \"Playing\" ]; then
+  echo ''
+else
+  echo ''
+fi
+")
+
+(defpoll timer-state-icon :interval "0.5s" "
+  state=$(cat /tmp/eww-timer-state 2>/dev/null)
+  if [ \"$state\" = \"running\" ]; then
+    echo \"\"  # pause icon
+  else
+    echo \"\"  # play icon
+  fi
+")
+
+
+;;(defpoll DAY :interval "5s" "date '+%A ,'")
+
+
+;;======================================================================
+;;=                                                                    =
+;;=                            W I D G E T S                           =
+;;=                                                                    =
+;;====================================================================== 
+
+;;=========== CLOCK =============
+(defwidget time []
+  (box :orientation "h"
+    (label :text TIME :class "time-font" :halign "start")
+
+)
+)
+
+
+(defwidget clock []
+  (box 
+    (box
+      (label :text TIME_PM :class "timePM-font")
+    )
+    
+  )
+)
+
+;;=========== DAY =============
+(defwidget day []
+  (box
+  :class "day"
+  :orientation "h"
+  :halign "end"
+  :valign "start"
+  :stagging "fg"
+  :hexpand false
+  :vexpand false
+  ;;(label :text DAY :class "day-font")
+  (label :text DATE :class "day-font"))
+)
+
+;;=========== USER-INFO =============
+
+;;=========== BACKGROUND =============
+(defwidget bg [] 
+	(box :class "bg")
+)
+
+;;=========== QUOTE =============
+(defwidget quote []
+  (box
+    :orientation "v"
+    :vexpand false
+    (label :text QUOTE :class "quote")
+  )
+)
+
+;;=========== POWER-MENU ================================
+(defwidget poweroff []
+  (box 
+    :class "powermenu"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :class "shutbutton" 
+      :onclick "systemctl poweroff" 
+      (label :text "⏻" :class "shut-text")
+    )
+  )
+)
+
+(defwidget logout []
+  (box 
+    :class "logoutmenu"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :class "shutbutton" 
+      :onclick "openbox --exit" 
+      (label :text "" :class "logout-text")
+    )
+  )
+)
+
+(defwidget reboot []
+  (box 
+    :class "rebootmenu"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :class "shutbutton" 
+      :onclick "systemctl reboot" 
+      (label :text "" :class "reboot-text")
+    )
+  )
+)
+
+(defwidget sleep []
+  (box 
+    :class "sleepmenu"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :class "shutbutton" 
+      :onclick "systemctl suspend" 
+      (label :text "" :class "sleep-text")
+    )
+  )
+)
+;;=========== POWER-MENU ENDS ================================
+
+
+;;=========== WIFI ================================
+
+(defwidget wifi []
+  (button :onclick "~/.config/ml4w/settings/networkmanager.sh"
+    (box :orientation "h" :class "wifibox" :spacing 1
+      ;;(label :text "" :class "wifilogo" :halign "start")
+      (label :text WIFI :class "wifitext")
+    )
+  )
+)
+
+(defwidget wifilogo []
+  (box 
+    :class "wifibox"
+    :orientation "h"
+    :hexpand "true"
+    (label :text "" :class "wifilogo"))
+)
+
+;;================== BLUETOOTH ======================
+(defwidget bluetooth []
+  (button :onclick "blueman-manager"
+    (box :orientation "h" :class "wifibox" :spacing 1
+      ;;(label :text "" :class "wifilogo" :halign "start")
+      (label :text BLUETOOTH :class "wifitext")
+    )
+  )
+)
+
+(defwidget bluetoothlogo []
+  (box 
+    :class "wifibox"
+    :orientation "h"
+    :hexpand "true"
+    (label :text "" :class "bluetoothlogo"))
+)
+
+;;================= VOLUME ================================
+
+
+
+(defwidget vologo []
+  (box :class "wifibox"
+  (label :text "" :class "volicon"))
+)
+
+(defwidget volnum []
+(button :class "music-btn" :onclick "playerctl play-pause"
+  (label :text MUSIC_PLAY_ICON :class "music-ctrl-icon")
+)
+)
+
+(defwidget volup []
+  (box 
+    :class "volup"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :onclick "playerctl next" 
+      (label :text "" :class "reboot-text")
+    )
+  )
+)
+
+(defwidget voldown []
+  (box 
+    :class "voldown"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :onclick "playerctl previous" 
+      (label :text "" :class "reboot-text")
+    )
+  )
+)
+;; ===================== VOLUME END =======================
+
+
+
+;; =================== MUSIC ==================
+
+(defwidget music-cover []
+  
+  (box 
+    :class "musicbox"
+    (image :path COVER_IMAGE :class "albumcover")
+
+  )
+)
+
+(defwidget music_info []
+    (box :orientation "v" :class "musicinfo-side" :hexpand "false"
+      (label :text MUSIC_TITLE :class "musicinfo-title" :halign "start")
+      (label :text MUSIC_ALBUM :class "musicinfo-album" :halign "start")
+    )
+)
+
+;;================= DAYTIME ==============================
+(defwidget greeting []
+  (box :orientation "h" :halign "start" :class "greeting-box"
+    (label :text DAYTIME :class "greeting-text" :halign "end")
+  )
+)
+
+;;=================== UPDATES ============================
+
+
+(defwidget update-count []
+  (button :onclick "~/.config/ml4w/settings/installupdates.sh"
+    (box :orientation "h" :class "wifibox" :spacing 1
+      ;;(label :text "" :class "wifilogo" :halign "start")
+      (label :text UPDATE_COUNT :class "wifitext")
+    )
+  )
+)
+
+(defwidget updatelogo []
+  (box 
+    :class "wifibox"
+    :orientation "h"
+    :hexpand "true"
+    (label :text "" :class "bluetoothlogo"))
+)
+
+;;=============== VOLUME BAR AND NUMBER ===================
+(defwidget volumenumber []
+  (box :class "wifibox"
+  (label :text VOLUME :class "wifitext")
+)
+)
+
+
+(defwidget volumeup []
+  (box 
+    :class "wifibox"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :onclick "pactl set-sink-volume @DEFAULT_SINK@ +5%" 
+      (label :text "+" :class "reboot-text")
+    )
+  )
+)
+
+(defwidget volumedown []
+  (box 
+    :class "wifibox"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :onclick "pactl set-sink-volume @DEFAULT_SINK@ -5%" 
+      (label :text "-" :class "reboot-text")
+    )
+  )
+)
+;;============== APP LIST ======================
+(defwidget applist []
+  (box :orientation "h" :class "applist-box"
+    ;; Browser
+    (button :class "app-btn" :tooltip "Web Browser" :onclick "firefox"
+      (label :text "" :class "app-icon")
+    )
+    ;; Code Editor
+    (button :class "app-btn" :tooltip "VS Code" :onclick "code"
+      (label :text "" :class "app-icon")
+    )
+    ;; Terminal
+    (button :class "app-btn" :tooltip "Terminal" :onclick "~/.config/ml4w/settings/terminal.sh"
+      (label :text "" :class "app-icon")
+    )
+    ;; Files
+    (button :class "app-btn" :tooltip "Files" :onclick "~/.config/ml4w/settings/filemanager.sh"
+      (label :text "" :class "app-icon")
+    )
+    ;; Add more as needed
+    (button :class "app-btn" :tooltip "Telegram" :onclick "flatpak run org.telegram.desktop"
+      (label :text "" :class "app-icon")
+    )
+
+    (button :class "app-btn" :tooltip "Spotify" :onclick "flatpak run com.spotify.Client"
+      (label :text "" :class "app-icon")
+    )
+  )
+)
+
+;;=============== TOOLS ==================
+(defwidget calculator []
+  (box 
+    :class "wifibox"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :onclick "~/.config/ml4w/settings/calculator.sh" 
+      (label :text "" :class "reboot-text")
+    )
+  )
+)
+
+(defwidget wallpaper []
+  (box 
+    :class "wifibox"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :onclick "/home/pritayan/Documents/scripts/wallpaper.sh" 
+      (label :text "" :class "bluetoothlogo")
+    )
+  )
+)
+
+(defwidget screenshot []
+  (box 
+    :class "wifibox"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :onclick "$HYPRSCRIPTS/screenshot.sh " 
+      (label :text "" :class "wifilogo")
+    )
+  )
+)
+
+(defwidget wlogout []
+  (box 
+    :class "wifibox"
+    :vexpand "false"
+    :hexpand "false"
+    (button 
+      :onclick "wlogout" 
+      (label :text "" :class "wifilogo")
+    )
+  )
+)
+
+;;====================  RESCOURCES USAGE ====================
+(defwidget system []
+  (box :class "genwin" :vexpand "false" :hexpand "false"
+    (box :orientation "v" :spacing 30 :halign "center" :valign "center"
+      (box :class "cpu_bar" :orientation "h" 
+
+        (scale :min 0 :max 100 :value CPU_USAGE :active "false")
+      )
+      (box :class "mem_bar" :orientation "h" 
+
+        (scale :min 0 :max 100 :value MEM_USAGE :active "false")
+      )
+      (box :class "bright_bar" :orientation "h" 
+
+        (scale :min 0 :max 100 :value BLIGHT :active "false")
+      )
+    )
+  )
+)
+
+
+(defwidget baricons []
+  (box :orientation "v" :spacing 12
+      (label :class "iconcpu" :text "")
+      (label :class "iconmem" :text "")
+      (label :class "iconbright" :text "")
+)
+)
+
+(defwidget tasktoday []
+  (box 
+    (label :text "Today's Bounty" :class "today")
+  )
+)
+
+;; ================== TODAY'S BOUTNY =================
+
+
+;; ============ JOURNAL ================================
+(defwidget journal []
+  (button :onclick "" :class "journalbtn" :orientation "v"
+  (label :text "" :class "journal-icon")  
+)
+)
+
+;;================ pomodoro ==================
+
+(defwidget pomodoro []
+  (box :class "pomobox"
+ )
+)
+
+(defwidget pomotime []
+    (label :text pomodoro-time :class "pomotext")
+)
+
+(defwidget timer-btn []
+  (box :orientation "h" :spacing 10
+    (button :onclick "~/bin/timer-switch.sh"
+           (label :text timer-state-icon :class "timerbtn"))))
+
+
+
+;;============== link LIST ======================
+(defwidget linklist []
+  (box :orientation "v" :class "applist-box"
+    ;; Browser
+    (button :class "app-btn" :tooltip "Web Browser" :onclick "firefox www.reddit.com"
+      (label :text "" :class "app-icon")
+    )
+    ;; Code Editor
+    (button :class "app-btn" :tooltip "VS Code" :onclick "firefox https://mail.google.com/mail/u/0/#inbox"
+      (label :text "" :class "app-icon")
+    )
+    ;; Terminal
+    (button :class "app-btn" :tooltip "Terminal" :onclick "firefox www.github.com"
+      (label :text "" :class "app-icon")
+    )
+  )
+)
+
+;; =========================== uptime ===========================
+(defwidget uptime []
+  (box :class "pomobox"
+  )
+)
+
+(defwidget uptimetext []
+  (label :text "UPTIME" :class "uptimetext")
+)
+
+(defwidget uptime-hour []
+  (label :text uptime-hours :class "uptimehour") 
+)
+
+(defwidget uptime-minute []
+  (label :text uptime-minutes :class "uptimeminute") 
+)
+
+;;=================== DIRECTORY LIST ==========================
+
+(defwidget folderlist []
+  (box :orientation "h" :class "applist-box"
+    ;; Browser
+    (button :class "app-btn" :tooltip "Documents" :onclick "thunar Documents"
+      (label :text "" :class "app-icon")
+    )
+    ;; Code Editor
+    (button :class "app-btn" :tooltip "Downloads" :onclick "thunar Downloads"
+      (label :text "" :class "app-icon")
+    )
+    ;; Terminal
+    (button :class "app-btn" :tooltip "Music" :onclick "thunar Music"
+      (label :text "" :class "app-icon")
+    )
+    ;; Files
+    (button :class "app-btn" :tooltip "Pictures" :onclick "thunar Pictures"
+      (label :text "" :class "app-icon")
+    )
+    ;; Add more as needed
+
+    (button :class "app-btn" :tooltip "Avyr" :onclick "thunar Documents/Avyr"
+      (label :text "" :class "app-icon")
+    )
+  )
+)
+
+(defwidget tempbox1 []
+  (box :class  "tempbox")
+)
+
+(defwidget tempbox2 []
+  (box :class  "tempbox")
+)
+
+(defwidget tempbox3 []
+  (box :class  "tempbox")
+)
+
+(defwidget text1 [] (label :text "ARCTYX" :class "zovtext"))
+(defwidget text2 [] (label :text "Journal" :class "jotext"))
+(defwidget text3 [] (label :text "Hello Pritayan!!" :class "hellotext"))
+(defwidget text4 [] (label :text "It's Cloudy outside. Go out & Explore..." :class "jotext"))
+(defwidget text5 [] (label :text "Pomodoro" :class "jotext"))
+
+;;============================================================================================================================================
+;;=================================                                                            ===============================================
+;;=================================                    W I N D O W S                           ===============================================
+;;=================================                                                            ===============================================
+;;============================================================================================================================================
+
+(defwindow time 
+  :monitor 0
+    :geometry (geometry :x 1900 :y 145 :width "15%" :height "10%")
+    (time)
+)
+
+;;=========== CLOCK-WIN =============
+(defwindow time-window
+  :monitor 0
+  :geometry (geometry :x 2100 :y 160 :width "10%" :height "10%")
+  (box 
+    :orientation "v"
+    (clock)
+  )
+)
+
+;;=========== DAY-WIN =============
+(defwindow day-win
+  :monitor 0
+  :orientation "v"
+  :geometry (geometry :x 1988 :y 265 :width "20%" :height "3%")
+  (day)
+)
+
+;;=========== USER-INFO-WIN =============
+
+
+;;=========== BACKGROUND-WIN =============
+(defwindow background 
+  :stacking "bg" 
+  :monitor 0 
+	:geometry (geometry :x 0 :y 0 :width "100%" :height "100%")
+	(bg)
+)
+;;=========== QUOTE-WIN =============
+(defwindow quote-win
+  :monitor 0
+  :geometry (geometry :x 0 :y 1280 :width "100%" :height "4%")
+  (quote)
+)
+
+;;=========== POWERMENU =============
+(defwindow poweroff
+  :monitor 0
+  :geometry (geometry :x 1975 :y 1180 :width "2.3%" :height "4%")
+  :stagging "fg"
+  (poweroff)
+)
+
+(defwindow logout
+  :monitor 0
+  :geometry (geometry :x 2150 :y 1180 :width "2.3%" :height "4%")
+  :stagging "fg"
+  (logout)
+)
+
+(defwindow reboot
+  :monitor 0
+  :geometry (geometry :x 2060 :y 1180 :width "2.3%" :height "4%")
+  :stagging "fg"
+  (reboot)
+)
+
+(defwindow sleep
+  :monitor 0
+  :geometry (geometry :x 2238 :y 1180 :width "2.3%" :height "4%")
+  :stagging "fg"
+  (sleep)
+)
+
+;;============== POWERMENU ENDS ==============
+
+;;================ WIFI ================================
+
+(defwindow wifiwidget
+  :monitor 0
+  :geometry (geometry :x 2045 :y 900 :width "11%" :height "5%")
+  (wifi)
+)
+
+(defwindow wifilogo
+  :monitor 0 
+  :geometry (geometry :x 1965 :y 900 :width "2.8%" :height "5%")
+  (wifilogo)
+)
+
+;;=======================================================
+
+;;================ BLUETOOTH =============================
+
+(defwindow bluetooth
+  :monitor 0
+  :geometry (geometry :x 2045 :y 990 :width "11%" :height "5%")
+  (bluetooth)
+)
+
+(defwindow bluetoothlogo
+  :monitor 0 
+  :geometry (geometry :x 1965 :y 990 :width "2.8%" :height "5%")
+  (bluetoothlogo)
+)
+
+;;======================================================
+
+(defwindow vologo
+  :monitor 0 
+  :geometry (geometry :x 1965 :y 810 :width "2.8%" :height "5%")
+  (vologo)
+)
+
+(defwindow volnum
+  :monitor 0 
+  :geometry (geometry :x 330 :y 1200 :width "3.5%" :height "6%")
+  (volnum)
+)
+
+(defwindow volup
+  :monitor 0
+  :geometry (geometry :x 430 :y 1210 :width "2.8%" :height "5%")
+  :stagging "fg"
+  (volup)
+)
+
+(defwindow voldown
+  :monitor 0
+  :geometry (geometry :x 230 :y 1210 :width "2.8%" :height "5%")
+  :stagging "fg"
+  (voldown)
+)
+
+;; ============== mucis ======================
+
+(defwindow music-cover-win
+   :monitor 0
+  :geometry (geometry :x 100 :y 650 :width "22%" :height "40%")
+  :stagging "bg"
+  (music-cover)
+)
+
+(defwindow music-info
+   :monitor 0
+  :geometry (geometry :x 120 :y 1100 :width "22%" :height "4%")
+  :stagging "fg"
+  (music_info)
+)
+
+(defwindow daytime
+  :monitor 0
+  :geometry (geometry :x 2010 :y 310 :width "30%" :height "4%")
+  (greeting)
+)
+
+;;==================== UPDATE ======================
+
+(defwindow update
+    :monitor 0
+  :geometry (geometry :x 2045 :y 1080 :width "11%" :height "5%")
+  (update-count)
+)
+
+(defwindow update-logo
+  :monitor 0 
+  :geometry (geometry :x 1965 :y 1080 :width "2.8%" :height "5%")
+  (updatelogo)
+)
+
+(defwindow volume-number
+  :monitor 0 
+  :geometry (geometry :x 2140 :y 810 :width "2.8%" :height "5%")
+  (volumenumber)
+)
+
+
+(defwindow volumeup
+  :monitor 0
+  :geometry (geometry :x 2230 :y 810 :width "2.8%" :height "5%")
+  :stagging "fg"
+  (volumeup)
+)
+
+(defwindow volumedown
+  :monitor 0
+  :geometry (geometry :x 2050 :y 810 :width "2.8%" :height "5%")
+  :stagging "fg"
+  (volumedown)
+)
+;;======================== APP LIST ====================
+
+
+;;================ tools ====================
+
+(defwindow calculator
+  :monitor 0
+  :geometry (geometry :x 2230 :y 720 :width "2.8%" :height "5%")
+  :stagging "fg"
+  (calculator)
+)
+
+(defwindow wallpaper
+  :monitor 0
+  :geometry (geometry :x 2140 :y 720 :width "2.8%" :height "5%")
+  :stagging "fg"
+  (wallpaper)
+)
+
+(defwindow screenshot
+  :monitor 0
+  :geometry (geometry :x 2050 :y 720 :width "2.8%" :height "5%")
+  :stagging "fg"
+  (screenshot)
+)
+
+(defwindow wlogout
+  :monitor 0
+  :geometry (geometry :x 1960 :y 720 :width "2.8%" :height "5%")
+  :stagging "fg"
+  (wlogout)
+)
+
+
+;; ======================= RESOURCES USAGE =================
+
+(defwindow resources-window
+  :monitor 0
+  :geometry (geometry :x 2000 :y 460 :width "1%" :height "5")
+  (system)
+)
+
+(defwindow baricons
+    :monitor 0
+  :geometry (geometry :x 1900 :y 450 :width "3%" :height "5")
+  (baricons)
+)
+;;================= today ======================
+
+
+;;========= journal =================
+
+(defwindow journal-win
+        :monitor 0
+  :geometry (geometry :x 1580 :y 830 :width 240 :height 360)
+  (journal)
+)
+
+(defwindow pomowin
+        :monitor 0
+  :geometry (geometry :x 1120 :y 830 :width 440 :height 150)
+  (pomodoro)
+)
+
+(defwindow pomotime
+        :monitor 0
+  :geometry (geometry :x 1040 :y 860 :width 440 :height 150)
+  (pomotime)
+)
+
+(defwindow linkwin
+        :monitor 0
+  :geometry (geometry :x 760 :y 630 :width 100 :height 350)
+  (linklist)
+)
+
+(defwindow uptimewin
+        :monitor 0
+  :geometry (geometry :x 880 :y 750 :width 220 :height 230)
+  (uptime)
+)
+
+(defwindow folderwin
+  :monitor 0
+  :geometry (geometry :x 1120 :y 685 :width 700 :height 125)
+  :stacking "fg"
+  (folderlist)
+)
+
+(defwindow app-launcher
+  :monitor 0
+  :geometry (geometry :x 760 :y 1000 :width 800 :height 125)
+  :stacking "fg"
+  (applist)
+)
+
+(defwindow tempwin1 
+  :monitor 0
+  :geometry (geometry :x 880 :y 630 :width 220 :height 100)
+  (tempbox1)
+)
+
+(defwindow tempwin2
+  :monitor 0
+  :geometry (geometry :x 1120 :y 630 :width 230 :height 35)
+  (tempbox2)
+)
+
+(defwindow tempwin3 
+  :monitor 0
+  :geometry (geometry :x 760 :y 1145 :width 800 :height 45)
+  (tempbox3)
+)
+(defwindow temptext1
+  :monitor 0
+  :geometry (geometry :x 1200 :y 560 :width 800 :height 45)
+  (text1)
+)
+(defwindow temptext2
+  :monitor 0
+  :geometry (geometry :x 1300 :y 1100 :width 800 :height 45)
+  (text2)
+)
+
+(defwindow temptext3
+  :monitor 0
+  :geometry (geometry :x 35 :y 100 :width 1500 :height 55)
+  (text3)
+)
+(defwindow temptext4
+  :monitor 0
+  :geometry (geometry :x 40 :y 320 :width 900 :height 45)
+  (text4)
+)
+(defwindow temptext5
+  :monitor 0
+  :geometry (geometry :x 1040 :y 830 :width 800 :height 45)
+  (text5)
+)
+
+(defwindow timer-btn
+  :monitor 0
+    :geometry (geometry :x 1040 :y 910 :width 800 :height 45)
+      (timer-btn)
+)
+
+(defwindow uptimetext
+        :monitor 0
+  :geometry (geometry :x 880 :y 670 :width 220 :height 230)
+  (uptimetext)
+)
+(defwindow uptimehour
+        :monitor 0
+  :geometry (geometry :x 880 :y 750 :width 220 :height 230)
+  (uptime-hour)
+)
+(defwindow uptimeminute
+        :monitor 0
+  :geometry (geometry :x 880 :y 820 :width 220 :height 230)
+  (uptime-minute)
+)
