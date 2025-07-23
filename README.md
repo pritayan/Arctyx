@@ -69,3 +69,4 @@ eww daemon &
 
 
 
+## AND THAT'S 'SCRIPTS' NOT 'SCRITPS' ...... 
