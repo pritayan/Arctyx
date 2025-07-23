@@ -1,5 +1,4 @@
-# 🌌 Arctyx — The Aesthetic EWW Bar for Hyprland
-                                        - By Pritayan
+# 🌌 Arctyx — The Aesthetic EWW Bar for Hyprland   - By Pritayan
 
 > ⚔️ Replace Waybar. Reclaim your screen.
 
