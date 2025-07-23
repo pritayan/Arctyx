@@ -1,6 +1,5 @@
 windows:
   - time-window
-
   - user-info-win
   - day-win
   - quote-win
