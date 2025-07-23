@@ -1,36 +1,41 @@
-# 🌌 Arctyx — The Aesthetic EWW Bar for Hyprland   - By Pritayan
+# 🌌 Arctyx — The Aesthetic EWW Bar for Hyprland  
+**By [Pritayan](https://github.com/pritayan)**  
 
-> ⚔️ Replace Waybar. Reclaim your screen.
+> ⚔️ _Replace Waybar. Reclaim your screen._
 
-Arctyx is a modular, animated, and beautifully themed [EWW](https://github.com/elkowar/eww) widget system designed for **Hyprland**. Crafted with performance, style, and minimal distraction in mind.
-
-
+Arctyx is a modular, animated, and beautifully themed **EWW bar** designed for **Hyprland**.  
+Crafted with **performance**, **style**, and **minimal distraction** in mind.
 
 ![Screenshot](https://github.com/pritayan/Arctyx/blob/05b9c2eba7b6eec96613c631fe216959b2f392e0/Screenshots/image.png)
+
 ---
 
 ## 🚀 Features
 
-- 📦 Modular widgets (Music, Time, Weather, System Info)
-- 🎨 Full SCSS-based styling (dark translucent theme)
-- 🎵 Music integration with MPRIS (Spotify, etc.)
-- 📶 Live system info via custom shell scripts
-- 🖥️ Designed for full floating popup usage
-- 🧠 Fast updates using `defpoll`
-- 🧼 Cleaned & commented `yuck` and `scss` files
-- 🧪 Compatible with Hyprland + Pipewire + Wayland
+- 📦 **Modular Widgets** — Music, Time, Weather, System Info & more  
+- 🎨 **Dark Translucent Theme** — Fully SCSS-styled  
+- 🎵 **MPRIS Music Integration** — Spotify, etc. via `playerctl`  
+- 📶 **Live System Stats** — Battery, Volume, Brightness via shell scripts  
+- 🖥️ **Popup Based Design** — Minimalist overlays, not panels  
+- 🧠 **Defpoll for Speed** — Snappy widget updates  
+- 🧼 **Commented Code** — Clean `.yuck` and `.scss` for easy tweaking  
+- 🧪 **Wayland Compatible** — Built for Hyprland + Pipewire
 
 ---
 
 ## 🛠 Requirements
 
-- **Hyprland** (wayland WM)
-- **EWW** (latest version)
-- `playerctl` (for music widgets)
-- `pamixer`, `brightnessctl`, `network scripts`
-- `bash`, `awk`, `date`, `hostname`, `whoami`, etc.
+Make sure these are installed:
+
+- [Hyprland](https://github.com/hyprwm/Hyprland) (Wayland WM)  
+- [EWW](https://elkowar.github.io/eww/) (Latest version)  
+- `playerctl`, `pamixer`, `brightnessctl`, `awk`, `date`, `whoami`, `hostname`  
+- Basic shell tools and config knowledge  
 
 ---
+
+## 📁 File Structure Overview
+
 
 **CONFIGURATION OVERVIEW**
 -.
@@ -41,16 +46,30 @@ Arctyx is a modular, animated, and beautifully themed [EWW](https://github.com/e
 -└── assets/        # Optional: for music art / background (not included yet)
 
 ---
-## AND THAT'S 'SCRIPTS' NOT 'SCRITPS' ...... 
+
 ---
-## [NOTE] - There could be error and bugs right now as I am still working on this. 
-## Changes and Edits are welcome. Join me in making it more advance and Frost-cool !!!! 
+> 🙄 **AND YES, IT’S `scripts/` NOT `scriTps/`** 😂
+---
+📝 [NOTE]
+
+    There could be errors and bugs right now as I am still working on this.
+    Changes and edits are welcome. Join me in making it more advanced and Frost-cool!!!
 ---
 
 ## Tips
-- Try to assign a keyboard shortcut key to start the eww. If you are using hyprlan (and/or dotfiles) you can create a keybind file to assign specific key to execute specific task.
-- Make sure you assign keyboard key for both running and quiting the eww. I could make an widget to run the whole setup. But to terminate, the widget would also got lost.
+Tips (do after installation)
 
+    You can use a systemd service or autostart Arctyx with Hyprland by adding it to your config.
+
+    Position the launcher icon using Hyprland rules if needed.
+
+    Adjust paths inside .sh files if your directories differ.
+
+    Add keybinds in Hyprland config to toggle eww open & eww close for convenience.
+
+    Avoid autostarting popups; use scripts or keybinds for more control.
+
+    Plan a fallback “kill switch” if widgets hide before quitting EWW.
 ---
 
 ## 📦 Installation
