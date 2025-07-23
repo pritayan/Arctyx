@@ -549,7 +549,6 @@ fi
 (defwidget text1 [] (label :text "ARCTYX" :class "zovtext"))
 (defwidget text2 [] (label :text "Journal" :class "jotext"))
 (defwidget text3 [] (label :text "Hello Pritayan!!" :class "hellotext"))
-(defwidget text4 [] (label :text "It's Cloudy outside. Go out & Explore..." :class "jotext"))
 (defwidget text5 [] (label :text "Pomodoro" :class "jotext"))
 
 ;;============================================================================================================================================
