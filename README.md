@@ -1,17 +1,3 @@
-ARCTYX
-
-
-1. Project Banner / Title
-2. About (short & punchy intro)
-3. Features
-4. Screenshots (with your attached image)
-5. Requirements
-6. Installation
-7. Configuration Overview
-8. Credits
-9. License
-
-
 # 🌌 Arctyx — The Aesthetic EWW Bar for Hyprland
 
 > ⚔️ Replace Waybar. Reclaim your screen. Style your desktop the way **LORD ZOVRATH** intended.
@@ -53,9 +39,11 @@ Arctyx is a modular, animated, and beautifully themed [EWW](https://github.com/e
 -├── scripts/       # Custom shell scripts
 -└── assets/        # Optional: for music art / background (not included yet)
 
-
+---
 ## AND THAT'S 'SCRIPTS' NOT 'SCRITPS' ...... 
 
+## Changes and Edits are welcome. Join me in making it more advance and Frost-cool !!!! 
+---
 ## 📦 Installation
 
 ```bash
