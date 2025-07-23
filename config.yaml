@@ -12,9 +12,9 @@ windows:
   - bluetooth
   - bluetoothlogo
   - vologo
-  - volnum
-  - volup
-  - voldown
+  - mPP
+  - mNext
+  - mPrevious
   - music-cover-win
   - music-info
   - daytime
