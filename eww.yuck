@@ -14,15 +14,15 @@
 (defpoll WIFI :interval "5s" "~/.config/eww/scripts/wifistatus.sh")
 (defpoll BLUETOOTH :interval "5s" "~/.config/eww/scripts/bluetooth.sh")
 (defpoll VOLUME :interval "0.01s" "pamixer --get-volume")
-(defpoll COVER_IMAGE :interval "0.1s" "echo /home/pritayan/.config/eww/cache/music_cover.jpg")
-(defpoll MUSIC_COVER   :interval "2s" "echo /home/youruser/.config/eww/cache/music_cover.jpg")
+(defpoll COVER_IMAGE :interval "0.1s" "echo ~/.config/eww/cache/music_cover.jpg")
+(defpoll MUSIC_COVER   :interval "2s" "echo ~/.config/eww/cache/music_cover.jpg")
 (defpoll MUSIC_TITLE   :interval "2s" "playerctl metadata title")
 (defpoll MUSIC_ELAPSED :interval "1s" "playerctl position | awk '{printf \"%d:%02d\", int($1/60), int($1%60)}'")
 (defpoll MUSIC_ALBUM :interval "2s" "playerctl metadata album || echo 'Unknown Album'")
 (defpoll MUSIC_STATUS :interval "1s" "playerctl status")
 (defpoll MUSIC_PROGRESS :interval "1s" "~/scripts/music_progress.sh")
-(defpoll DAYTIME :interval "1s" "/home/pritayan/Documents/scripts/daytime.sh")
-(defpoll UPDATE_COUNT :interval "60m" "/home/pritayan/Documents/scripts/updatecount.sh")
+(defpoll DAYTIME :interval "1s" "~/.config/eww/scripts/daytime.sh")
+(defpoll UPDATE_COUNT :interval "60m" "~/.config/eww/scripts/updatecount.sh")
 (defpoll BOUNTY :interval "1s" "head ~/Documents/bounty.txt")
 (defpoll CPU_USAGE :interval "2s" "top -bn1 | grep '%Cpu' | awk '{print 100 - $8}' | cut -d'.' -f1")
 (defpoll MEM_USAGE :interval "2s" "free | awk '/Mem:/ {print int($3 / $2 * 100)}'")
@@ -281,7 +281,7 @@ fi
 
 
 (defwidget update-count []
-  (button :onclick "~/.config/ml4w/settings/installupdates.sh"
+  (button :onclick "~/.config/settings/installupdates.sh"
     (box :orientation "h" :class "wifibox" :spacing 1
       ;;(label :text "" :class "wifilogo" :halign "start")
       (label :text UPDATE_COUNT :class "wifitext")
@@ -340,11 +340,11 @@ fi
       (label :text "" :class "app-icon")
     )
     ;; Terminal
-    (button :class "app-btn" :tooltip "Terminal" :onclick "~/.config/ml4w/settings/terminal.sh"
+    (button :class "app-btn" :tooltip "Terminal" :onclick "~/.config/settings/terminal.sh"
       (label :text "" :class "app-icon")
     )
     ;; Files
-    (button :class "app-btn" :tooltip "Files" :onclick "~/.config/ml4w/settings/filemanager.sh"
+    (button :class "app-btn" :tooltip "Files" :onclick "~/.config/settings/filemanager.sh"
       (label :text "" :class "app-icon")
     )
     ;; Add more as needed
@@ -365,7 +365,7 @@ fi
     :vexpand "false"
     :hexpand "false"
     (button 
-      :onclick "~/.config/ml4w/settings/calculator.sh" 
+      :onclick "~/.config/settings/calculator.sh" 
       (label :text "" :class "reboot-text")
     )
   )
@@ -377,7 +377,7 @@ fi
     :vexpand "false"
     :hexpand "false"
     (button 
-      :onclick "/home/pritayan/Documents/scripts/wallpaper.sh" 
+      :onclick "~/.config/eww/scripts/wallpaper.sh" 
       (label :text "" :class "bluetoothlogo")
     )
   )
