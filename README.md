@@ -91,3 +91,21 @@ cd ~/.config/eww
 sudo chmod +x ewwloader.sh
 
 
+---
+## 🤝 ## Contribution Welcome!
+Arctyx is still evolving — and your help can shape it into something powerful and polished. Whether it's:
+
+Reporting bugs
+
+Suggesting new features
+
+Writing or improving scripts
+
+Enhancing the UI/UX
+
+Or just refining the documentation...
+
+You're welcome to open issues, make pull requests, or share ideas.
+No contribution is too small. Let’s build this together — for the community, by the community.
+
+📬 DM me or start a discussion — I'm always open to collaborations!
