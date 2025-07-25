@@ -7,6 +7,7 @@ Arctyx is a modular, animated, and beautifully themed **EWW bar** designed for *
 Crafted with **performance**, **style**, and **minimal distraction** in mind.
 
 ![Screenshot](https://github.com/pritayan/Arctyx/blob/05b9c2eba7b6eec96613c631fe216959b2f392e0/Screenshots/image.png)
+![Screenshot](https://github.com/pritayan/Arctyx/blob/75568d58efb9e201c5de765111b0db8abd4ac31a/Screenshots/screenshot_25072025_125300.jpg)
 
 ---
 
