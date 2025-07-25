@@ -81,17 +81,17 @@ No contribution is too small. Let’s build this together — for the community,
 ## Tips
 Tips (do after installation)
 
-    You can use a systemd service or autostart Arctyx with Hyprland by adding it to your config.
+-You can use a systemd service or autostart Arctyx with Hyprland by adding it to your config.
 
-    Position the launcher icon using Hyprland rules if needed.
+-Position the launcher icon using Hyprland rules if needed.
 
-    Adjust paths inside .sh files if your directories differ.
+-Adjust paths inside .sh files if your directories differ.
 
-    Add keybinds in Hyprland config to toggle eww open & eww close for convenience.
+-Add keybinds in Hyprland config to toggle eww open & eww close for convenience.
 
-    Avoid autostarting popups; use scripts or keybinds for more control.
+-Avoid autostarting popups; use scripts or keybinds for more control.
 
-    Plan a fallback “kill switch” if widgets hide before quitting EWW.
+-Plan a fallback “kill switch” if widgets hide before quitting EWW.
 ---
 
 ## 📦 Installation
