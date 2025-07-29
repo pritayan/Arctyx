@@ -99,7 +99,7 @@ Tips (do after installation)
 ## 📦 Installation
 
 -----
-# The Build is currently us progress and evolving. It is recommended to have prior knowledge of Linux before installation. Once the build is complete, I'll make another release for easy installation.
+# The Build is currently in progress and evolving. It is recommended to have prior knowledge of Linux before installation. Once the build is complete, I'll make another release for easy installation.
 
 ```bash
 # Clone the repo
