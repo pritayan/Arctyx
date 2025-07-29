@@ -116,4 +116,6 @@ cd ~/.config/eww
 
 # Make the script executable (if not)
 sudo chmod +x ewwloader.sh
+```
 
+# Thanks
